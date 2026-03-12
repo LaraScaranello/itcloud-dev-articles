@@ -19,8 +19,6 @@ class Article extends Model
         'published_at',
     ];
 
-    protected $withCount = ['developers'];
-
     public function developers(): BelongsToMany
     {
         return $this->belongsToMany(Developer::class);
