@@ -29,7 +29,7 @@ class Article extends Model
         parent::boot();
 
         static::creating(static function ($article) {
-            $article->slug = Str::slug($article->title);
+            $article->slug = Str::slug($article->title . '-' . uniqid('', true));
         });
     }
 }
