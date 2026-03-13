@@ -3,6 +3,7 @@
 namespace App\Livewire\Developers;
 
 use App\Models\Developer;
+use App\Models\Skill;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,7 +16,9 @@ class Update extends Component
 
     public function render(): View
     {
-        return view('livewire.developers.update');
+        return view('livewire.developers.update', [
+            'skillsList' => Skill::orderBy('name')->get(),
+        ]);
     }
 
     #[On('developer::update')]

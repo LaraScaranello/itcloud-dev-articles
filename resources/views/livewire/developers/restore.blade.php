@@ -1,6 +1,8 @@
 <div>
     @if($modal)
         <div
+            x-data
+            x-on:keydown.escape.window="$wire.set('modal', false)"
             class="fixed inset-0 z-50 flex items-center justify-center px-4"
             wire:key="restore-developer-modal"
         >
