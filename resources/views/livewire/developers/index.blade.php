@@ -5,7 +5,7 @@
                 Desenvolvedores
             </h1>
 
-            <button type="button"
+            <button type="button" @click="$dispatch('developer::create')"
                 class="border rounded-lg border-purple-800 bg-purple-800 text-sm py-2.5 px-4 cursor-pointer
                 transition hover:bg-purple-700 flex items-center justify-center gap-2">
                 <span>+</span>
@@ -191,4 +191,6 @@
     <div class="mt-6">
         {{ $developers->links() }}
     </div>
+
+    <livewire:developers.create/>
 </div>

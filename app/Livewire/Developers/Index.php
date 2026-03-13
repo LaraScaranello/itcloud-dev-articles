@@ -6,6 +6,7 @@ use App\Enums\Seniority;
 use App\Models\Developer;
 use App\Models\Skill;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -34,34 +35,9 @@ class Index extends Component
             $this->sortField = $field;
             $this->sortDirection = 'asc';
         }
-
-        $this->resetPage();
     }
 
-    public function updatedSearch(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatedSeniority(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatedSkills(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatedPerPage(): void
-    {
-        if (! in_array((int) $this->perPage, [5, 15, 25, 50])) {
-            $this->perPage = 15;
-        }
-
-        $this->resetPage();
-    }
-
+    #[On('developer::reload')]
     public function render(): View
     {
         $developers = Developer::query()

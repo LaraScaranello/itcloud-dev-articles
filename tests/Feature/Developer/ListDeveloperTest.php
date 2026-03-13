@@ -12,16 +12,17 @@ use Livewire\Livewire;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
-it('should be able to access the route developers', function () {
-    actingAs(User::factory()->create());
+beforeEach(function () {
+    $user = User::factory()->create();
+    actingAs($user);
+});
 
+it('should be able to access the route developers', function () {
     get(route('developers'))
         ->assertOk();
 });
 
 test("let's create a livewire component to list all developers in the page", function () {
-    actingAs(User::factory()->create());
-
     Developer::factory()->count(10)->create();
 
     $lw = Livewire::test(Developers\Index::class);
@@ -36,11 +37,8 @@ test("let's create a livewire component to list all developers in the page", fun
 });
 
 it('should be able to filter by name and email', function () {
-    $user = User::factory()->create();
     $joe = Developer::factory()->create(['name' => 'Joe Doe', 'email' => 'joe@email.com']);
     $mario = Developer::factory()->create(['name' => 'Mario', 'email' => 'little@mario.com']);
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->assertViewHas('developers', function ($developers) {
@@ -61,11 +59,8 @@ it('should be able to filter by name and email', function () {
 });
 
 it('should be able to filter by seniority', function () {
-    $user = User::factory()->create();
     $junior = Developer::factory()->create(['name' => 'Junior', 'email' => 'junior@email.com', 'seniority' => Seniority::Junior->value]);
     $senior = Developer::factory()->create(['name' => 'Senior', 'email' => 'senior@email.com', 'seniority' => Seniority::Senior->value]);
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->assertViewHas('developers', fn ($developers) => $developers->total() === 2)
@@ -81,9 +76,7 @@ it('should be able to filter by seniority', function () {
 });
 
 it('should be able to filter developers by selected skills', function () {
-    $user = User::factory()->create();
-
-    $php = Skill::factory()->create(['name' => 'PHP']);
+     $php = Skill::factory()->create(['name' => 'PHP']);
     $laravel = Skill::factory()->create(['name' => 'Laravel']);
     $vue = Skill::factory()->create(['name' => 'Vue']);
 
@@ -95,8 +88,6 @@ it('should be able to filter developers by selected skills', function () {
     $developerTwo->skills()->attach($laravel->id);
     $developerThree->skills()->attach($vue->id);
 
-    actingAs($user);
-
     Livewire::test(Developers\Index::class)
         ->set('skills', [$php->id, $laravel->id])
         ->assertSet('skills', [$php->id, $laravel->id])
@@ -107,11 +98,8 @@ it('should be able to filter developers by selected skills', function () {
 });
 
 it('should be able to sort by name', function () {
-    $user = User::factory()->create();
     $joe = Developer::factory()->create(['name' => 'Joe Doe', 'email' => 'joe@email.com']);
     $mario = Developer::factory()->create(['name' => 'Mario', 'email' => 'little@mario.com']);
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->set('sortField', 'name')
@@ -128,11 +116,8 @@ it('should be able to sort by name', function () {
 });
 
 it('should be able to sort by email', function () {
-    $user = User::factory()->create();
     Developer::factory()->create(['name' => 'Joe Doe', 'email' => 'aaa@email.com']);
     Developer::factory()->create(['name' => 'Mario', 'email' => 'zzz@email.com']);
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->set('sortField', 'email')
@@ -149,11 +134,8 @@ it('should be able to sort by email', function () {
 });
 
 it('should be able to sort by seniority', function () {
-    $user = User::factory()->create();
     Developer::factory()->create(['name' => 'Junior Dev', 'email' => 'junior@email.com', 'seniority' => Seniority::Junior->value]);
     Developer::factory()->create(['name' => 'Senior Dev', 'email' => 'senior@email.com', 'seniority' => Seniority::Senior->value]);
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->set('sortField', 'seniority')
@@ -170,11 +152,7 @@ it('should be able to sort by seniority', function () {
 });
 
 it('should be able to paginate developers', function () {
-    $user = User::factory()->create();
-
     Developer::factory()->count(16)->create();
-
-    actingAs($user);
 
     Livewire::test(Developers\Index::class)
         ->set('perPage', 5)
@@ -186,10 +164,6 @@ it('should be able to paginate developers', function () {
 });
 
 it('should show empty state when no developers are found', function () {
-    $user = User::factory()->create();
-
-    actingAs($user);
-
     Livewire::test(Developers\Index::class)
         ->set('search', 'nao-existe-123')
         ->assertViewHas('developers', fn ($developers) => $developers->total() === 0)
