@@ -15,10 +15,15 @@ class Index extends Component
     use WithPagination;
 
     public $search = '';
+
     public $seniority = '';
+
     public array $skills = [];
+
     public $perPage = 15;
+
     public $sortField = 'name';
+
     public $sortDirection = 'asc';
 
     public function sortBy(string $field): void
@@ -34,6 +39,15 @@ class Index extends Component
         } else {
             $this->sortField = $field;
             $this->sortDirection = 'asc';
+        }
+
+        $this->resetPage();
+    }
+
+    public function updated($property): void
+    {
+        if (in_array($property, ['search', 'seniority', 'skills', 'perPage'])) {
+            $this->resetPage();
         }
     }
 
