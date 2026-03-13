@@ -6,7 +6,7 @@
         >
             <div
                 class="absolute inset-0 bg-black/70"
-                wire:click="close"
+                wire:click="$set('modal', false)"
             ></div>
 
             <div class="relative z-10 w-full max-w-md rounded-2xl border border-gray-800 bg-zinc-950 p-6 shadow-xl">
