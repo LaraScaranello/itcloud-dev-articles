@@ -28,6 +28,8 @@ class Create extends Component
     #[On('developer::create')]
     public function open(): void
     {
+        $this->form->reset();
+
         $this->form->resetErrorBag();
         $this->modal = true;
     }
