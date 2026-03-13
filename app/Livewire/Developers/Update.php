@@ -12,6 +12,8 @@ class Update extends Component
 {
     public Form $form;
 
+    public $skillsList;
+
     public bool $modal = false;
 
     public function render(): View
@@ -19,6 +21,11 @@ class Update extends Component
         return view('livewire.developers.update', [
             'skillsList' => Skill::orderBy('name')->get(),
         ]);
+    }
+
+    public function mount(): void
+    {
+        $this->skillsList = Skill::orderBy('name')->get();
     }
 
     #[On('developer::update')]

@@ -100,21 +100,30 @@
                                 </label>
 
                                 <span class="text-xs text-zinc-500">
-                                    Atualize as skills vinculadas
+                                    Selecione uma ou mais
                                 </span>
                             </div>
 
                             <div class="max-h-52 overflow-y-auto rounded-xl border border-white/10 bg-zinc-900 p-4">
-                                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <div class="flex flex-wrap gap-2">
                                     @foreach($skillsList as $skill)
-                                        <label class="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-zinc-200 transition hover:bg-white/5">
+                                        <label class="cursor-pointer">
                                             <input
                                                 type="checkbox"
                                                 value="{{ $skill->id }}"
                                                 wire:model="form.skills"
-                                                class="rounded border-white/20 bg-zinc-800 text-purple-600 focus:ring-purple-500"
+                                                class="peer hidden"
                                             >
-                                            <span>{{ $skill->name }}</span>
+
+                                            <span
+                                                class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-200 transition
+                                                       hover:bg-white/10
+                                                       peer-checked:border-purple-500
+                                                       peer-checked:bg-purple-500/20
+                                                       peer-checked:text-purple-300"
+                                            >
+                                                {{ $skill->name }}
+                                            </span>
                                         </label>
                                     @endforeach
                                 </div>
