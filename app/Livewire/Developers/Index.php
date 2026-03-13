@@ -15,16 +15,12 @@ class Index extends Component
     use WithPagination;
 
     public $search = '';
-
     public $seniority = '';
-
     public array $skills = [];
-
     public $perPage = 15;
-
     public $sortField = 'name';
-
     public $sortDirection = 'asc';
+    public bool $search_trash = false;
 
     public function sortBy(string $field): void
     {
@@ -46,7 +42,7 @@ class Index extends Component
 
     public function updated($property): void
     {
-        if (in_array($property, ['search', 'seniority', 'skills', 'perPage'])) {
+        if (in_array($property, ['search', 'seniority', 'skills', 'perPage', 'search_trash'])) {
             $this->resetPage();
         }
     }
@@ -55,6 +51,7 @@ class Index extends Component
     public function render(): View
     {
         $developers = Developer::query()
+            ->when($this->search_trash, fn ($q) => $q->onlyTrashed())
             ->when($this->search, function ($q) {
                 $q->where(function ($query) {
                     $query->where('name', 'like', "%{$this->search}%")

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('seniority', ['jr', 'pl', 'sr']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
