@@ -234,14 +234,14 @@
                                 </svg>
                             </button>
                         @else
-{{--                            <button--}}
-{{--                                type="button" @click="$dispatch('developer::restore', { id: {{ $developer->id }} })"--}}
-{{--                                class="flex-1 cursor-pointer sm:flex-none border border-blue-800 bg-blue-900/30 text-blue-300 rounded-lg px-4 py-2 text-sm hover:bg-blue-900/50 transition flex items-center justify-center"--}}
-{{--                            >--}}
-{{--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">--}}
-{{--                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />--}}
-{{--                                </svg>--}}
-{{--                            </button>--}}
+                            <button
+                                type="button" @click="$dispatch('developer::restore', { id: {{ $developer->id }} })"
+                                class="flex-1 cursor-pointer sm:flex-none border border-green-800 bg-green-900/30 text-green-300 rounded-lg px-4 py-2 text-sm hover:bg-green-900/50 transition flex items-center justify-center"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                                </svg>
+                            </button>
                         @endunless
                     </div>
                 </div>
@@ -260,4 +260,5 @@
     <livewire:developers.create/>
     <livewire:developers.update/>
     <livewire:developers.archive/>
+    <livewire:developers.restore/>
 </div>
