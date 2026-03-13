@@ -40,6 +40,16 @@ class Form extends BaseForm
         ];
     }
 
+    public function setDeveloper(Developer $developer): void
+    {
+        $this->developer = $developer;
+
+        $this->name = $developer->name;
+        $this->email = $developer->email;
+        $this->seniority = $developer->seniority;
+        $this->skills = $developer->skills->pluck('id')->toArray();
+    }
+
     public function create(): void
     {
         $this->validate();
@@ -53,5 +63,18 @@ class Form extends BaseForm
         $developer->skills()->sync($this->skills);
 
         $this->reset();
+    }
+
+    public function update(): void
+    {
+        $this->validate();
+
+        $this->developer->name = $this->name;
+        $this->developer->email = $this->email;
+        $this->developer->seniority = $this->seniority;
+
+        $this->developer->update();
+
+        $this->developer->skills()->sync($this->skills);
     }
 }
