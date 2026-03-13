@@ -54,6 +54,7 @@ class Index extends Component
                 });
             })
             ->with('skills')
+            ->withCount('articles')
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 

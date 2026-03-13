@@ -109,6 +109,46 @@
         </div>
     </div>
 
+    <div class="mb-4 flex flex-col items-end sm:flex-row sm:items-center sm:justify-end gap-3">
+        <div class="flex flex-wrap gap-2">
+            <button
+                type="button"
+                wire:click="sortBy('name')"
+                class="rounded-lg border px-3 py-2 text-sm transition
+                    {{ $sortField === 'name' ? 'border-purple-700 bg-purple-900/30 text-purple-300' : 'border-gray-500 hover:bg-zinc-800' }}"
+            >
+                Nome
+                @if($sortField === 'name')
+                    <span class="ml-1">{{ $sortDirection === 'asc' ? '↑' : '↓' }}</span>
+                @endif
+            </button>
+
+            <button
+                type="button"
+                wire:click="sortBy('email')"
+                class="rounded-lg border px-3 py-2 text-sm transition
+                    {{ $sortField === 'email' ? 'border-purple-700 bg-purple-900/30 text-purple-300' : 'border-gray-500 hover:bg-zinc-800' }}"
+            >
+                E-mail
+                @if($sortField === 'email')
+                    <span class="ml-1">{{ $sortDirection === 'asc' ? '↑' : '↓' }}</span>
+                @endif
+            </button>
+
+            <button
+                type="button"
+                wire:click="sortBy('seniority')"
+                class="rounded-lg border px-3 py-2 text-sm transition
+                    {{ $sortField === 'seniority' ? 'border-purple-700 bg-purple-900/30 text-purple-300' : 'border-gray-500 hover:bg-zinc-800' }}"
+            >
+                Senioridade
+                @if($sortField === 'seniority')
+                    <span class="ml-1">{{ $sortDirection === 'asc' ? '↑' : '↓' }}</span>
+                @endif
+            </button>
+        </div>
+    </div>
+
     @php
         $seniorityColors = [
             'jr' => 'bg-emerald-900/40 text-emerald-300 border border-emerald-700',
@@ -123,7 +163,7 @@
                 <div class="flex flex-col gap-4 h-full">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                         <div class="min-w-0">
-                            <h2 class="text-base sm:text-lg font-semibold break-words">
+                            <h2 class="text-base sm:text-lg font-semibold wrap-break-word">
                                 {{ $developer->name }}
                             </h2>
 
