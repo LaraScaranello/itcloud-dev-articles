@@ -203,7 +203,7 @@
 
                     <div class="mt-auto pt-2 flex gap-2 sm:justify-end">
                         <button
-                            type="button"
+                            type="button" @click="$dispatch('developer::update', { id: {{ $developer->id }} })"
                             class="flex-1 sm:flex-none border border-gray-600 rounded-lg px-4 py-2 text-sm hover:bg-zinc-700 transition flex items-center justify-center"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -234,4 +234,5 @@
     </div>
 
     <livewire:developers.create/>
+    <livewire:developers.update/>
 </div>
