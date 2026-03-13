@@ -167,5 +167,5 @@ it('should show empty state when no developers are found', function () {
     Livewire::test(Developers\Index::class)
         ->set('search', 'nao-existe-123')
         ->assertViewHas('developers', fn ($developers) => $developers->total() === 0)
-        ->assertSee('Nenhum desenvolvedor encontrado.');
+        ->assertSee('Nenhum desenvolvedor encontrado');
 });
