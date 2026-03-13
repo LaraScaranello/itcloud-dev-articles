@@ -18,7 +18,7 @@ beforeEach(function () {
 });
 
 it('should be able to access the route developers', function () {
-    get(route('developers'))
+    get(route('index'))
         ->assertOk();
 });
 
@@ -76,7 +76,7 @@ it('should be able to filter by seniority', function () {
 });
 
 it('should be able to filter developers by selected skills', function () {
-     $php = Skill::factory()->create(['name' => 'PHP']);
+    $php = Skill::factory()->create(['name' => 'PHP']);
     $laravel = Skill::factory()->create(['name' => 'Laravel']);
     $vue = Skill::factory()->create(['name' => 'Vue']);
 
