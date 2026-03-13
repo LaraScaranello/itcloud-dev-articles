@@ -1,22 +1,23 @@
 <div class="px-4 sm:px-6 lg:px-0">
-    <div class="mb-8">
-        <div class="flex items-center justify-between gap-3">
-            <h1 class="text-xl sm:text-2xl font-extrabold">
-                Desenvolvedores
-            </h1>
-
-            <button type="button" @click="$dispatch('developer::create')"
-                class="border rounded-lg border-purple-800 bg-purple-800 text-sm py-2.5 px-4 cursor-pointer
-                transition hover:bg-purple-700 flex items-center justify-center gap-2">
-                <span>+</span>
-                <span class="hidden sm:inline">Novo Desenvolvedor</span>
-            </button>
+    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+            <h1 class="text-2xl font-extrabold">Desenvolvedores</h1>
+            <p class="text-sm text-gray-400 mt-1">
+                Gerencie os desenvolvedores cadastrados, filtros e ordenação.
+            </p>
         </div>
 
-        <hr class="border-t mt-3 border-gray-600">
+        <button
+            type="button"
+            @click="$dispatch('developer::create')"
+            class="border rounded-lg border-purple-800 bg-purple-800 text-sm py-2.5 px-4 cursor-pointer transition hover:bg-purple-700 flex items-center justify-center gap-2"
+        >
+            <span>+</span>
+            <span>Novo Desenvolvedor</span>
+        </button>
     </div>
 
-    <div class="mb-6">
+    <div class="mb-6 rounded-2xl border border-gray-800 bg-zinc-950/60 p-4 sm:p-5">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             <div class="sm:col-span-2 xl:col-span-1">
                 <div class="relative">
@@ -157,7 +158,7 @@
         ];
     @endphp
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         @forelse($developers as $developer)
             <div class="border border-gray-500 rounded-xl p-4 sm:p-5 bg-zinc-950/40 hover:bg-zinc-900/40 transition">
                 <div class="flex flex-col gap-4 h-full">
