@@ -8,7 +8,7 @@ Route::view('/', 'livewire.auth.login')->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
-    Route::get('/developers', Developers\Index::class)->name('developers');
+    Route::get('/developers', Developers\Index::class)->name('index');
 });
 
 require __DIR__.'/settings.php';
