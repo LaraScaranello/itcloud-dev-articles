@@ -18,7 +18,7 @@ beforeEach(function () {
 });
 
 it('should be able to access the route developers', function () {
-    get(route('index'))
+    get(route('developers'))
         ->assertOk();
 });
 
