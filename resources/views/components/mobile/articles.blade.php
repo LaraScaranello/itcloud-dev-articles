@@ -1,7 +1,21 @@
 <div class="space-y-3 md:hidden">
     @forelse($articles as $article)
         <div class="border-b border-white/10 py-4 last:border-b-0">
-            <div class="flex items-start justify-between gap-3">
+            <div class="flex items-start gap-3">
+                @if($article->cover_image)
+                    @php
+                        $cover = str_starts_with($article->cover_image, 'http')
+                            ? $article->cover_image
+                            : Storage::url($article->cover_image);
+                    @endphp
+
+                    <img
+                        src="{{ $cover }}"
+                        alt="{{ $article->title }}"
+                        class="h-16 w-20 flex-shrink-0 rounded-lg object-cover"
+                    >
+                @endif
+
                 <div class="min-w-0 flex-1">
                     <h2 class="text-base font-semibold leading-snug text-white break-words">
                         {{ $article->title }}

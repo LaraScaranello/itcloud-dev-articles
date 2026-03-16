@@ -25,7 +25,7 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'content' => fake()->paragraphs(3, true),
             'published_at' => fake()->dateTime(),
-            'cover_image' => null,
+            'cover_image' => 'https://picsum.photos/seed/'.fake()->uuid().'/800/600',
         ];
     }
 }

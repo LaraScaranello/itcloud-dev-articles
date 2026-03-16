@@ -5,6 +5,7 @@ namespace App\Livewire\Articles;
 use App\Models\Article;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,6 +17,7 @@ class Index extends Component
 
     public $perPage = 15;
 
+    #[On('article::reload')]
     public function render(): View
     {
         $search = trim($this->search);
