@@ -13,6 +13,18 @@
                 Gerencie artigos técnicos, autores vinculados e publicações.
             </p>
         </div>
+
+        <button
+            type="button"
+            @click="$dispatch('article::create')"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-700 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-purple-600"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+
+            <span>Novo artigo</span>
+        </button>
     </div>
 
     <div class="mb-6 rounded-2xl border border-white/10 bg-zinc-950/80 p-4 shadow-sm sm:p-5">
@@ -21,7 +33,7 @@
                 <input
                     type="text"
                     wire:model.live="search"
-                    placeholder="Buscar por título"
+                    placeholder="Buscar por título, autor ou data de publicação"
                     class="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
                 />
             </div>
@@ -49,4 +61,7 @@
     <div class="mt-6">
         {{ $articles->links() }}
     </div>
+
+    <livewire:articles.create />
+    <livewire:articles.update />
 </div>

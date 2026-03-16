@@ -25,7 +25,7 @@ it('should be able to access the route articles', function () {
 test("let's create a livewire component to list all articles in the page", function () {
     Article::factory()->count(10)->create();
 
-    $lw = Livewire::test(Index::class);
+    $lw = Livewire::test(Articles\Index::class);
 
     $articles = $lw->viewData('articles');
 
@@ -36,11 +36,11 @@ test("let's create a livewire component to list all articles in the page", funct
     }
 });
 
-it('should be able to filter by title and author name', function () {
+it('should be able to filter by title, author name and published date', function () {
     $matchedByTitle = Article::factory()->create(['title' => 'Laravel Livewire Guide', 'published_at' => '2025-01-10']);
     $matchedByAuthor = Article::factory()->create(['title' => 'Testing in PHP', 'published_at' => '2025-02-15']);
     $notMatched = Article::factory()->create(['title' => 'Vue Basics', 'published_at' => '2025-03-20']);
-    $author = Developer::factory()->create(['name' => 'John Doe', 'published_at' => '2024-11-01']);
+    $author = Developer::factory()->create(['name' => 'John Doe']);
     $otherAuthor = Developer::factory()->create(['name' => 'Jane Smith']);
 
     $matchedByAuthor->developers()->sync([$author->id]);
@@ -63,6 +63,17 @@ it('should be able to filter by title and author name', function () {
             $ids = collect($items->items())->pluck('id');
 
             expect($ids)->toContain($matchedByTitle->id)
+                ->and($ids)->not->toContain($notMatched->id);
+
+            return true;
+        });
+
+    Livewire::test(Articles\Index::class)
+        ->set('search', '15/02/2025')
+        ->assertViewHas('articles', function (LengthAwarePaginator $items) use ($matchedByAuthor, $notMatched) {
+            $ids = collect($items->items())->pluck('id');
+
+            expect($ids)->toContain($matchedByAuthor->id)
                 ->and($ids)->not->toContain($notMatched->id);
 
             return true;
