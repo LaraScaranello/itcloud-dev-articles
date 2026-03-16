@@ -80,6 +80,7 @@
             <div class="mt-auto flex items-center justify-end gap-2 pt-5">
                 <button
                     type="button"
+                    @click="$dispatch('article::update', { id: {{ $article->id }} })"
                     class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-zinc-900 text-zinc-300 transition hover:bg-white/5 hover:text-white"
                     title="Editar artigo"
                 >

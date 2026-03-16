@@ -63,4 +63,5 @@
     </div>
 
     <livewire:articles.create />
+    <livewire:articles.update />
 </div>

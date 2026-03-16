@@ -19,6 +19,10 @@ class Article extends Model
         'published_at',
     ];
 
+    protected $casts = [
+        'published_at' => 'date',
+    ];
+
     public function developers(): BelongsToMany
     {
         return $this->belongsToMany(Developer::class);
