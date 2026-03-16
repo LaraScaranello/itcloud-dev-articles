@@ -25,7 +25,7 @@ it('should be able to access the route articles', function () {
 test("let's create a livewire component to list all articles in the page", function () {
     Article::factory()->count(10)->create();
 
-    $lw = Livewire::test(Index::class);
+    $lw = Livewire::test(Articles\Index::class);
 
     $articles = $lw->viewData('articles');
 
