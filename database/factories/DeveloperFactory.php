@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Developer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class DeveloperFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'seniority' => fake()->randomElement(['jr', 'pl', 'sr']),
+            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
         ];
     }
 }
