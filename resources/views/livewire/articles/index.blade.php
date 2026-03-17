@@ -87,4 +87,5 @@
     <livewire:articles.update />
     <livewire:articles.archive />
     <livewire:articles.restore />
+    <livewire:articles.force-delete />
 </div>
