@@ -23,13 +23,15 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
+        User::factory(3)->create();
+
         $skills = Skill::factory(10)->create();
 
         $developers = Developer::factory(15)->create();
 
         foreach ($developers as $developer) {
             $developer->skills()->attach(
-                $skills->random(rand(2,4))->pluck('id')
+                $skills->random(rand(2, 4))->pluck('id')
             );
         }
 
@@ -37,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($articles as $article) {
             $article->developers()->attach(
-                $developers->random(rand(1,3))->pluck('id')
+                $developers->random(rand(1, 3))->pluck('id')
             );
         }
     }

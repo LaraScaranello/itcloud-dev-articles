@@ -27,6 +27,8 @@ class Archive extends Component
 
     public function archive(): void
     {
+        $this->authorize('delete', $this->article);
+
         $this->article->delete();
         $this->modal = false;
 

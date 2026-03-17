@@ -27,6 +27,8 @@ class Restore extends Component
 
     public function restore(): void
     {
+        $this->authorize('restore', $this->developer);
+
         $this->developer->restore();
         $this->modal = false;
 

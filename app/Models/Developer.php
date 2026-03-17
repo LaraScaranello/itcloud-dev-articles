@@ -16,6 +16,7 @@ class Developer extends Model
         'name',
         'email',
         'seniority',
+        'user_id',
     ];
 
     protected $withCount = ['articles'];

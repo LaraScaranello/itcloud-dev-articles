@@ -34,7 +34,10 @@ class Update extends Component
     #[On('article::update')]
     public function load(int $id): void
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
+
+        $this->authorize('update', $article);
+
         $this->form->setArticle($article);
         $this->form->resetErrorBag();
         $this->modal = true;
@@ -42,6 +45,8 @@ class Update extends Component
 
     public function save(): void
     {
+        $this->authorize('update', $this->form->article);
+
         $this->form->update();
 
         $this->modal = false;

@@ -65,6 +65,7 @@ class Form extends BaseForm
             'content' => $this->content,
             'published_at' => $this->published_at,
             'cover_image' => $coverPath,
+            'user_id' => auth()->id(),
         ]);
 
         $article->developers()->sync($this->developers);
@@ -89,6 +90,6 @@ class Form extends BaseForm
 
         $this->article->developers()->sync($this->developers);
 
-        
+
     }
 }
