@@ -6,19 +6,19 @@
             class="fixed inset-0 z-50 overflow-y-auto"
         >
             <div
-                class="fixed inset-0 bg-black/70 backdrop-blur-sm"
+                class="fixed inset-0 bg-black/50 backdrop-blur-sm dark:bg-black/70"
                 wire:click="$set('modal', false)"
             ></div>
 
             <div class="relative flex min-h-full items-start justify-center p-4 sm:p-6">
-                <div class="relative z-10 my-4 w-full max-w-3xl rounded-2xl border border-white/10 bg-zinc-950 shadow-2xl sm:my-8">
-                    <div class="border-b border-white/10 px-6 py-5 sm:px-8">
+                <div class="relative z-10 my-4 w-full max-w-3xl rounded-2xl border border-zinc-200 bg-white shadow-2xl sm:my-8 dark:border-white/10 dark:bg-zinc-950">
+                    <div class="border-b border-zinc-200 px-6 py-5 sm:px-8 dark:border-white/10">
                         <div class="flex items-start justify-between gap-4">
                             <div>
-                                <h2 class="text-xl font-semibold text-white">
+                                <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
                                     Novo Artigo
                                 </h2>
-                                <p class="mt-1 text-sm text-zinc-400">
+                                <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                                     Preencha os dados para cadastrar um novo artigo.
                                 </p>
                             </div>
@@ -26,7 +26,7 @@
                             <button
                                 type="button"
                                 wire:click="$set('modal', false)"
-                                class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-zinc-400 transition hover:bg-white/5 hover:text-white"
+                                class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
@@ -38,68 +38,68 @@
                     <form wire:submit.prevent="save" class="px-6 py-6 sm:px-8">
                         <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                             <div class="sm:col-span-2">
-                                <label for="title" class="mb-2 block text-sm font-medium text-zinc-200">
+                                <label for="title" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">
                                     Título
                                 </label>
                                 <input
                                     id="title"
                                     type="text"
                                     wire:model="form.title"
-                                    class="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                                    class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500"
                                     placeholder="Ex.: Boas práticas com Laravel e Livewire"
                                 >
 
                                 @error('form.title')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="content" class="mb-2 block text-sm font-medium text-zinc-200">
+                                <label for="content" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">
                                     Conteúdo
                                 </label>
                                 <textarea
                                     id="content"
                                     rows="8"
                                     wire:model="form.content"
-                                    class="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                                    class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500"
                                     placeholder="<h2>Título da seção</h2><p>Seu conteúdo aqui...</p>"
                                 ></textarea>
 
                                 @error('form.content')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div>
-                                <label for="published_at" class="mb-2 block text-sm font-medium text-zinc-200">
+                                <label for="published_at" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">
                                     Data de publicação
                                 </label>
                                 <input
                                     id="published_at"
                                     type="date"
                                     wire:model="form.published_at"
-                                    class="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                                    class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-white/10 dark:bg-zinc-900 dark:text-white"
                                 >
 
                                 @error('form.published_at')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div>
-                                <label for="cover_image" class="mb-2 block text-sm font-medium text-zinc-200">
+                                <label for="cover_image" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-200">
                                     Imagem de capa
                                 </label>
                                 <input
                                     id="cover_image"
                                     type="file"
                                     wire:model="form.cover_image"
-                                    class="block w-full text-sm text-zinc-300 file:mr-4 file:rounded-lg file:border-0 file:bg-purple-700 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-purple-600"
+                                    class="block w-full text-sm text-zinc-700 dark:text-zinc-300 file:mr-4 file:rounded-lg file:border-0 file:bg-purple-700 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-purple-600"
                                 >
 
                                 @error('form.cover_image')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -119,7 +119,7 @@
                                 @click.outside="open = false"
                             >
                                 <div class="mb-2 flex items-center justify-between gap-3">
-                                    <label class="block text-sm font-medium text-zinc-200">
+                                    <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-200">
                                         Desenvolvedores
                                     </label>
 
@@ -132,7 +132,7 @@
                                     <button
                                         type="button"
                                         @click="open = !open; if (open) { $nextTick(() => $refs.searchInput.focus()) }"
-                                        class="flex w-full items-center justify-between rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-left text-sm text-white outline-none transition hover:border-white/20 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                                        class="flex w-full items-center justify-between rounded-xl border border-zinc-300 bg-white px-4 py-3 text-left text-sm text-zinc-900 outline-none transition hover:border-zinc-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:border-white/20"
                                     >
                                         <div class="min-w-0 flex-1">
                                             <template x-if="selectedDevelopers().length === 0">
@@ -144,7 +144,7 @@
                                                     <span class="truncate" x-text="selectedSummary()"></span>
 
                                                     <span
-                                                        class="shrink-0 rounded-full border border-purple-500/40 bg-purple-500/10 px-2 py-0.5 text-xs text-purple-300"
+                                                        class="shrink-0 rounded-full border border-purple-300 bg-purple-50 px-2 py-0.5 text-xs text-purple-700 dark:border-purple-500/40 dark:bg-purple-500/10 dark:text-purple-300"
                                                         x-text="selectedDevelopers().length"
                                                     ></span>
                                                 </div>
@@ -157,7 +157,7 @@
                                             viewBox="0 0 24 24"
                                             stroke-width="1.8"
                                             stroke="currentColor"
-                                            class="ml-3 h-4 w-4 shrink-0 text-zinc-400 transition"
+                                            class="ml-3 h-4 w-4 shrink-0 text-zinc-500 transition dark:text-zinc-400"
                                             :class="{ 'rotate-180': open }"
                                         >
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
@@ -168,16 +168,16 @@
                                         x-show="open"
                                         x-transition.origin.top
                                         x-cloak
-                                        class="absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-950 shadow-2xl"
+                                        class="absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl dark:border-white/10 dark:bg-zinc-950"
                                     >
-                                        <div class="border-b border-white/10 p-3">
+                                        <div class="border-b border-zinc-200 p-3 dark:border-white/10">
                                             <div class="relative">
                                                 <input
                                                     x-ref="searchInput"
                                                     type="text"
                                                     x-model="search"
                                                     placeholder="Pesquisar desenvolvedor..."
-                                                    class="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-2.5 pr-10 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                                                    class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 pr-10 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500"
                                                 >
 
                                                 <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-zinc-500">
@@ -190,7 +190,7 @@
 
                                         <div class="max-h-64 overflow-y-auto p-2">
                                             <template x-if="selectedDevelopers().length > 0">
-                                                <div class="mb-2 border-b border-white/10 pb-2">
+                                                <div class="mb-2 border-b border-zinc-200 pb-2 dark:border-white/10">
                                                     <div class="mb-2 px-2 text-[11px] font-medium uppercase tracking-wide text-zinc-500">
                                                         Selecionados
                                                     </div>
@@ -200,10 +200,10 @@
                                                             <button
                                                                 type="button"
                                                                 @click="remove(developer.id)"
-                                                                class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-purple-300 transition hover:bg-white/5"
+                                                                class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-purple-700 transition hover:bg-purple-50 dark:text-purple-300 dark:hover:bg-white/5"
                                                             >
                                                                 <span x-text="developer.name"></span>
-                                                                <span class="text-xs text-purple-400">Remover</span>
+                                                                <span class="text-xs text-purple-500 dark:text-purple-400">Remover</span>
                                                             </button>
                                                         </template>
                                                     </div>
@@ -219,7 +219,7 @@
                                                     <button
                                                         type="button"
                                                         @click="toggle(developer.id)"
-                                                        class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-zinc-200 transition hover:bg-white/5"
+                                                        class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/5"
                                                     >
                                                         <span x-text="developer.name"></span>
 
@@ -241,20 +241,20 @@
                                 </div>
 
                                 @error('form.developers')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
 
                                 @error('form.developers.*')
-                                    <span class="mt-1 block text-xs text-red-400">{{ $message }}</span>
+                                    <span class="mt-1 block text-xs text-red-500 dark:text-red-400">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="mt-8 flex flex-col-reverse gap-3 border-t border-white/10 pt-5 sm:flex-row sm:justify-end">
+                        <div class="mt-8 flex flex-col-reverse gap-3 border-t border-zinc-200 pt-5 sm:flex-row sm:justify-end dark:border-white/10">
                             <button
                                 type="button"
                                 wire:click="$set('modal', false)"
-                                class="inline-flex items-center justify-center rounded-xl border border-white/10 px-4 py-2.5 text-sm font-medium text-zinc-300 transition hover:bg-white/5 hover:text-white"
+                                class="inline-flex items-center justify-center rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-900 dark:border-white/10 dark:text-zinc-300 dark:hover:bg-white/5 dark:hover:text-white"
                             >
                                 Cancelar
                             </button>
