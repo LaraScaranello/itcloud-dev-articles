@@ -32,7 +32,7 @@ it('should be able to create an article', function () {
     $this->assertDatabaseHas('articles', [
         'title' => 'Laravel Livewire Guide',
         'content' => 'This is the content of my article',
-        'published_at' => '2024-01-01',
+        'published_at' => '2024-01-01 00:00:00',
     ]);
 });
 
@@ -56,7 +56,7 @@ it('should accept html content when creating an article', function () {
     $this->assertDatabaseHas('articles', [
         'title' => 'Laravel HTML Article',
         'content' => $html,
-        'published_at' => '2024-01-01',
+        'published_at' => '2024-01-01 00:00:00',
     ]);
 });
 
