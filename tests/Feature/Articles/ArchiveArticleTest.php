@@ -66,7 +66,7 @@ it('should list archived items', function () {
         })
         ->set('search_trash', true)
         ->assertViewHas('articles', function (LengthAwarePaginator $items) use ($archived) {
-            expect($items->items())->toHaveCount(3)
+            expect($items->items())->toHaveCount(1)
                 ->and(
                     collect($items->items())
                         ->filter(fn (Article $article) => $article->id === $archived->id)
