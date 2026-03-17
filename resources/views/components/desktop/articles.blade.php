@@ -1,6 +1,7 @@
 <div class="hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
     @forelse($articles as $article)
-        <div class="group flex h-full flex-col rounded-2xl border border-white/10 bg-zinc-950/80 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-white/15 hover:bg-zinc-900/80">
+        <div class="group flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50
+                    dark:border-white/10 dark:bg-zinc-950/80 dark:hover:border-white/15 dark:hover:bg-zinc-900/80">
             @if($article->cover_image)
                 @php
                     $cover = str_starts_with($article->cover_image, 'http')
@@ -9,7 +10,7 @@
                 @endphp
 
                 @if($cover)
-                    <div class="mb-4 overflow-hidden rounded-xl border border-white/10">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-zinc-200 dark:border-white/10">
                         <img
                             src="{{ $cover }}"
                             alt="{{ $article->title }}"
@@ -21,16 +22,19 @@
 
             <div class="mb-4 flex items-center justify-between gap-2">
                 <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full border border-blue-700 bg-blue-900/30 px-2.5 py-1 text-xs font-medium text-blue-300">
+                    <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700
+                                 dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
                         {{ $article->developers_count }} autor(es)
                     </span>
 
                     @if($article->published_at)
-                        <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-zinc-300">
+                        <span class="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700
+                                     dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
                             {{ \Illuminate\Support\Carbon::parse($article->published_at)->format('d/m/Y') }}
                         </span>
                     @else
-                        <span class="inline-flex items-center rounded-full border border-amber-700 bg-amber-900/30 px-2.5 py-1 text-xs font-medium text-amber-300">
+                        <span class="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700
+                                     dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
                             Não publicado
                         </span>
                     @endif
@@ -38,17 +42,17 @@
             </div>
 
             <div class="min-w-0">
-                <h2 class="text-lg font-semibold leading-snug text-white line-clamp-3">
+                <h2 class="line-clamp-3 text-lg font-semibold leading-snug text-zinc-900 dark:text-white">
                     {{ $article->title }}
                 </h2>
 
-                <p class="mt-2 text-xs text-zinc-500 truncate">
+                <p class="mt-2 truncate text-xs text-zinc-500">
                     {{ $article->slug }}
                 </p>
             </div>
 
             <div class="mt-4">
-                <p class="text-sm leading-6 text-zinc-400 line-clamp-4">
+                <p class="line-clamp-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                     {{ strip_tags($article->content) }}
                 </p>
             </div>
@@ -60,7 +64,8 @@
 
                 <div class="flex flex-wrap gap-2">
                     @forelse($article->developers->take(3) as $developer)
-                        <span class="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-200">
+                        <span class="rounded-lg border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700
+                                     dark:border-white/10 dark:bg-white/5 dark:text-zinc-200">
                             {{ $developer->name }}
                         </span>
                     @empty
@@ -70,7 +75,8 @@
                     @endforelse
 
                     @if($article->developers->count() > 3)
-                        <span class="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-400">
+                        <span class="rounded-lg border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-xs text-zinc-500
+                                     dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
                             +{{ $article->developers->count() - 3 }}
                         </span>
                     @endif
@@ -78,23 +84,25 @@
             </div>
 
             <div class="mt-auto flex items-center justify-end gap-2 pt-5">
-                <button
-                    type="button"
-                    @click="$dispatch('article::show', { id: {{ $article->id }} })"
-                    class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-zinc-900 text-zinc-300 transition hover:bg-white/5 hover:text-white"
-                    title="Ver artigo"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                </button>
                 @unless($article->trashed())
+                    <button
+                        type="button"
+                        @click="$dispatch('article::show', { id: {{ $article->id }} })"
+                        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900
+                               dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-white/5 dark:hover:text-white"
+                        title="Ver artigo"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </button>
                     @can('update', $article)
                         <button
                             type="button"
                             @click="$dispatch('article::update', { id: {{ $article->id }} })"
-                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-blue/10 border-blue-800 bg-blue-900/20 text-blue-300 transition hover:bg-blue-900/35"
+                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700 transition hover:bg-blue-100
+                                   dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/35"
                             title="Editar artigo"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -107,7 +115,8 @@
                         <button
                             type="button"
                             @click="$dispatch('article::archive', { id: {{ $article->id }} })"
-                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-800 bg-red-900/20 text-red-300 transition hover:bg-red-900/35"
+                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-300 bg-red-50 text-red-600 transition hover:bg-red-100
+                                   dark:border-red-800 dark:bg-red-900/20 dark:text-red-300 dark:hover:bg-red-900/35"
                             title="Arquivar artigo"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -120,7 +129,8 @@
                         <button
                             type="button"
                             @click="$dispatch('article::restore', { id: {{ $article->id }} })"
-                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-emerald-800 bg-emerald-900/20 text-emerald-300 transition hover:bg-emerald-900/35"
+                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-700 transition hover:bg-emerald-100
+                                   dark:border-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300 dark:hover:bg-emerald-900/35"
                             title="Restaurar artigo"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -133,9 +143,10 @@
                         <button
                             type="button"
                             @click="$dispatch('article::force-delete', { id: {{ $article->id }} })"
-                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-800 bg-red-900/20 text-red-300 transition hover:bg-red-900/35"
+                            class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-300 bg-red-50 text-red-600 transition hover:bg-red-100
+                                   dark:border-red-800 dark:bg-red-900/20 dark:text-red-300 dark:hover:bg-red-900/35"
                             title="Excluir permanentemente"
-                            >
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.108 0 0 0-7.5 0" />
                             </svg>
@@ -145,9 +156,10 @@
             </div>
         </div>
     @empty
-        <div class="col-span-full rounded-2xl border border-dashed border-white/10 bg-zinc-950/60 px-6 py-12 text-center">
+        <div class="col-span-full rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-12 text-center
+                    dark:border-white/10 dark:bg-zinc-950/60">
             <div class="mx-auto max-w-md">
-                <h3 class="text-base font-semibold text-white">
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     Nenhum artigo encontrado
                 </h3>
                 <p class="mt-2 text-sm text-zinc-500">

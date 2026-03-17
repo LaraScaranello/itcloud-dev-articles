@@ -1,25 +1,28 @@
 <div class="hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
     @forelse($developers as $developer)
-        <div class="group rounded-2xl border border-white/10 bg-zinc-950/80 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-white/15 hover:bg-zinc-900/80">
+        <div class="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50
+                    dark:border-white/10 dark:bg-zinc-950/80 dark:hover:border-white/15 dark:hover:bg-zinc-900/80">
+
             <div class="flex h-full flex-col gap-4">
                 <div class="flex items-start justify-between gap-3">
                     <div class="min-w-0 flex-1">
-                        <h2 class="text-base font-semibold leading-tight text-white break-words sm:text-lg">
+                        <h2 class="text-base font-semibold leading-tight text-zinc-900 break-words sm:text-lg dark:text-white">
                             {{ $developer->name }}
                         </h2>
 
-                        <p class="mt-1 text-sm text-zinc-400 whitespace-nowrap">
+                        <p class="mt-1 text-sm text-zinc-500 whitespace-nowrap dark:text-zinc-400">
                             {{ $developer->email }}
                         </p>
                     </div>
 
                     <div class="flex shrink-0 flex-wrap justify-end gap-2">
                         <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium
-                            {{ $seniorityColors[strtolower($developer->seniority)] ?? 'border border-zinc-700 bg-zinc-800 text-zinc-200' }}">
+                            {{ $seniorityColors[strtolower($developer->seniority)] ?? 'border border-zinc-300 bg-zinc-100 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200' }}">
                             {{ \App\Enums\Seniority::from($developer->seniority)->label() }}
                         </span>
 
-                        <span class="inline-flex items-center rounded-full border border-blue-700 bg-blue-900/30 px-2.5 py-1 text-xs font-medium text-blue-300">
+                        <span class="inline-flex items-center rounded-full border border-blue-200 bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-700
+                                     dark:border-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
                             {{ $developer->articles_count ?? $developer->articles->count() }} artigo(s)
                         </span>
                     </div>
@@ -32,7 +35,8 @@
 
                     <div class="flex flex-wrap gap-2">
                         @forelse($developer->skills as $skill)
-                            <span class="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-zinc-200">
+                            <span class="rounded-lg border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700
+                                         dark:border-white/10 dark:bg-white/5 dark:text-zinc-200">
                                 {{ $skill->name }}
                             </span>
                         @empty
@@ -49,7 +53,8 @@
                             <button
                                 type="button"
                                 @click="$dispatch('developer::update', { id: {{ $developer->id }} })"
-                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-zinc-900 text-zinc-300 transition hover:bg-white/5 hover:text-white"
+                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900
+                                       dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-white/5 dark:hover:text-white"
                                 title="Editar desenvolvedor"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -62,7 +67,8 @@
                             <button
                                 type="button"
                                 @click="$dispatch('developer::archive', { id: {{ $developer->id }} })"
-                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-800 bg-red-900/20 text-red-300 transition hover:bg-red-900/35"
+                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-300 bg-red-100 text-red-600 transition hover:bg-red-200
+                                       dark:border-red-800 dark:bg-red-900/20 dark:text-red-300 dark:hover:bg-red-900/35"
                                 title="Arquivar desenvolvedor"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -75,7 +81,8 @@
                             <button
                                 type="button"
                                 @click="$dispatch('developer::restore', { id: {{ $developer->id }} })"
-                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-emerald-800 bg-emerald-900/20 text-emerald-300 transition hover:bg-emerald-900/35"
+                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-emerald-300 bg-emerald-100 text-emerald-700 transition hover:bg-emerald-200
+                                       dark:border-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300 dark:hover:bg-emerald-900/35"
                                 title="Restaurar desenvolvedor"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -88,7 +95,8 @@
                             <button
                                 type="button"
                                 @click="$dispatch('developer::force-delete', { id: {{ $developer->id }} })"
-                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-800 bg-red-900/20 text-red-300 transition hover:bg-red-900/35"
+                                class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-300 bg-red-100 text-red-600 transition hover:bg-red-200
+                                       dark:border-red-800 dark:bg-red-900/20 dark:text-red-300 dark:hover:bg-red-900/35"
                                 title="Excluir permanentemente"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="h-5 w-5">
@@ -101,9 +109,10 @@
             </div>
         </div>
     @empty
-        <div class="col-span-full rounded-2xl border border-dashed border-white/10 bg-zinc-950/60 px-6 py-12 text-center">
+        <div class="col-span-full rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-12 text-center
+                    dark:border-white/10 dark:bg-zinc-950/60">
             <div class="mx-auto max-w-md">
-                <h3 class="text-base font-semibold text-white">
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     Nenhum desenvolvedor encontrado
                 </h3>
                 <p class="mt-2 text-sm text-zinc-500">
