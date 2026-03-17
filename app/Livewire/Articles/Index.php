@@ -17,6 +17,8 @@ class Index extends Component
 
     public $perPage = 15;
 
+    public bool $search_trash = false;
+
     #[On('article::reload')]
     public function render(): View
     {
@@ -24,6 +26,7 @@ class Index extends Component
         $driver = DB::connection()->getDriverName();
 
         $articles = Article::query()
+            ->when($this->search_trash, fn ($q) => $q->onlyTrashed())
             ->when($search !== '', function ($q) use ($search, $driver) {
                 $q->where(function ($query) use ($search, $driver) {
                     $query->where('title', 'like', "%{$search}%")

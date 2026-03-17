@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cover_image')->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
