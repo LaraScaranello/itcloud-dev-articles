@@ -2,12 +2,23 @@
 
 use App\Livewire\Developers;
 use App\Models\Developer;
-
+use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\Livewire;
+
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertSoftDeleted;
 
+beforeEach(function () {
+    $this->user = User::factory()->create();
+
+    actingAs($this->user);
+});
+
 it('should be able to archive a developer', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
 
     Livewire::test(Developers\Archive::class)
         ->set('developer', $developer)
@@ -19,7 +30,9 @@ it('should be able to archive a developer', function () {
 });
 
 test('when confirming we should load the developer and set modal to true', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
 
     Livewire::test(Developers\Archive::class)
         ->call('confirmAction', $developer->id)
@@ -28,7 +41,9 @@ test('when confirming we should load the developer and set modal to true', funct
 });
 
 test('after archiving we should dispatch an event to tell the list to reload', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
 
     Livewire::test(Developers\Archive::class)
         ->set('developer', $developer)
@@ -37,7 +52,9 @@ test('after archiving we should dispatch an event to tell the list to reload', f
 });
 
 test('after archiving we should close the modal', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
 
     Livewire::test(Developers\Archive::class)
         ->set('developer', $developer)
@@ -46,9 +63,13 @@ test('after archiving we should close the modal', function () {
 });
 
 it('should list archived items', function () {
-    Developer::factory()->count(2)->create();
+    Developer::factory()->count(2)->create([
+        'user_id' => $this->user->id,
+    ]);
 
-    $archived = Developer::factory()->create();
+    $archived = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $archived->delete();
 
     Livewire::test(Developers\Index::class)

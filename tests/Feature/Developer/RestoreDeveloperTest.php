@@ -2,10 +2,22 @@
 
 use App\Livewire\Developers;
 use App\Models\Developer;
+use App\Models\User;
+use Livewire\Livewire;
+
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertNotSoftDeleted;
 
+beforeEach(function () {
+    $this->user = User::factory()->create();
+
+    actingAs($this->user);
+});
+
 it('should be able to restore a developer', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $developer->delete();
 
     Livewire::test(Developers\Restore::class)
@@ -18,7 +30,9 @@ it('should be able to restore a developer', function () {
 });
 
 test('when confirming we should load the developer and set modal to true', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $developer->delete();
 
     Livewire::test(Developers\Restore::class)
@@ -28,7 +42,9 @@ test('when confirming we should load the developer and set modal to true', funct
 });
 
 test('after restoring we should dispatch an event to tell the list to reload', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $developer->delete();
 
     Livewire::test(Developers\Restore::class)
@@ -38,7 +54,9 @@ test('after restoring we should dispatch an event to tell the list to reload', f
 });
 
 test('after restoring we should close the modal', function () {
-    $developer = Developer::factory()->create();
+    $developer = Developer::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $developer->delete();
 
     Livewire::test(Developers\Restore::class)
