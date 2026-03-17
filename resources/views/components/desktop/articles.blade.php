@@ -91,6 +91,7 @@
 
                 <button
                     type="button"
+                    @click="$dispatch('article::archive', { id: {{ $article->id }} })"
                     class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-red-800 bg-red-900/20 text-red-300 transition hover:bg-red-900/35"
                     title="Excluir artigo"
                 >
