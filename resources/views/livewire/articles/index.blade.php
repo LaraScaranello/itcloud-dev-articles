@@ -86,4 +86,5 @@
     <livewire:articles.create />
     <livewire:articles.update />
     <livewire:articles.archive />
+    <livewire:articles.restore />
 </div>
