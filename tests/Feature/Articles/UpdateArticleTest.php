@@ -4,16 +4,19 @@ use App\Livewire\Articles;
 use App\Models\Article;
 use App\Models\Developer;
 use App\Models\User;
-
 use Illuminate\Http\UploadedFile;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 
 beforeEach(function () {
-    actingAs(User::factory()->create());
+    $this->user = User::factory()->create();
+
+    actingAs($this->user);
 
     $this->article = Article::factory()->create([
+        'user_id' => $this->user->id,
         'title' => 'Old Title',
         'content' => 'Old Content',
         'published_at' => '2024-01-01',
@@ -203,5 +206,33 @@ describe('validations', function () {
     });
 });
 
+it('should not allow a non-owner to load the article for editing', function () {
+    $owner = User::factory()->create();
 
+    $article = Article::factory()->create([
+        'user_id' => $owner->id,
+    ]);
 
+    $otherUser = User::factory()->create();
+    actingAs($otherUser);
+
+    Livewire::test(Articles\Update::class)
+        ->call('load', $article->id)
+        ->assertForbidden();
+});
+
+it('should not allow a non-owner to save article changes', function () {
+    $owner = User::factory()->create();
+
+    $article = Article::factory()->create([
+        'user_id' => $owner->id,
+    ]);
+
+    $otherUser = User::factory()->create();
+    actingAs($otherUser);
+
+    Livewire::test(Articles\Update::class)
+        ->set('form.title', 'Hacked Title')
+        ->call('load', $article->id)
+        ->assertForbidden();
+});

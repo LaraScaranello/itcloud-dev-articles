@@ -2,10 +2,22 @@
 
 use App\Livewire\Articles;
 use App\Models\Article;
+use App\Models\User;
+use Livewire\Livewire;
+
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseMissing;
 
+beforeEach(function () {
+    $this->user = User::factory()->create();
+
+    actingAs($this->user);
+});
+
 it('should be able to permanently delete an archived article', function () {
-    $article = Article::factory()->create();
+    $article = Article::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $article->delete();
 
     Livewire::test(Articles\ForceDelete::class)
@@ -18,7 +30,9 @@ it('should be able to permanently delete an archived article', function () {
 });
 
 test('when confirming force delete we should load the archived article and set modal to true', function () {
-    $article = Article::factory()->create();
+    $article = Article::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $article->delete();
 
     Livewire::test(Articles\ForceDelete::class)
@@ -28,7 +42,9 @@ test('when confirming force delete we should load the archived article and set m
 });
 
 test('after permanently deleting we should dispatch an event to tell the list to reload', function () {
-    $article = Article::factory()->create();
+    $article = Article::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $article->delete();
 
     Livewire::test(Articles\ForceDelete::class)
@@ -38,7 +54,9 @@ test('after permanently deleting we should dispatch an event to tell the list to
 });
 
 test('after permanently deleting we should close the modal', function () {
-    $article = Article::factory()->create();
+    $article = Article::factory()->create([
+        'user_id' => $this->user->id,
+    ]);
     $article->delete();
 
     Livewire::test(Articles\ForceDelete::class)
