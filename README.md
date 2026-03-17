@@ -6,7 +6,7 @@
 ![PHP](https://img.shields.io/badge/PHP-8.5+-777BB4)
 ![Tests](https://img.shields.io/badge/Tests-Pest-green)
 
-Mini aplicação desenvolvida com **Laravel + Livewire** para gerenciamento de **desenvolvedores** e **artigos técnicos**.
+Aplicação fullstack desenvolvida com **Laravel + Livewire** para gerenciamento de **desenvolvedores** e **artigos técnicos**.
 
 O sistema permite criar, organizar e relacionar conteúdos técnicos com múltiplos autores, incluindo filtros dinâmicos e interface responsiva.
 
@@ -214,6 +214,28 @@ tests/
 * Banco SQLite incluso
 * Dados populados automaticamente
 * Foco em avaliação técnica e boas práticas
+
+---
+
+## 🎬 Demonstração
+
+🎥 [Assistir vídeo explicativo](https://www.youtube.com/watch?v=sptFS1TPZbM)
+
+---
+
+## 📸 Preview
+
+### 📝 Artigos
+![Artigos](./docs/articles.png)
+
+### 👩‍💻 Desenvolvedores
+![Desenvolvedores](./docs/developers.png)
+
+### ➕ Criação de desenvolvedor
+![Modal](./docs/modal.png)
+
+### ➕ Criação de artigo
+![Modal1](./docs/modal1.png)
 
 ---
 
