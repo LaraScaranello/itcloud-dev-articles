@@ -40,7 +40,7 @@
                     <input
                         type="text"
                         wire:model.live="search"
-                        placeholder="Buscar por nome ou e-mail"
+                        placeholder="Buscar por título, autor ou data"
                         class="w-full rounded-xl border border-white/10 bg-zinc-900 py-2.5 pr-3 pl-9 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
                     />
                 </div>
