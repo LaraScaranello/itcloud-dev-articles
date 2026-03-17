@@ -1,168 +1,230 @@
-# ITCloud 
+# ITCloud 🚀
 
-Mini aplicação desenvolvida em **Laravel + Livewire** para gerenciamento de desenvolvedores e artigos técnicos.
+![Laravel](https://img.shields.io/badge/Laravel-Framework-red)
+![Livewire](https://img.shields.io/badge/Livewire-Fullstack-blue)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-UI-38BDF8)
+![PHP](https://img.shields.io/badge/PHP-8.5+-777BB4)
+![Tests](https://img.shields.io/badge/Tests-Pest-green)
 
-O projeto permite cadastrar desenvolvedores, criar artigos e associar múltiplos desenvolvedores a cada artigo, com filtros em tempo real.
+Mini aplicação desenvolvida com **Laravel + Livewire** para gerenciamento de **desenvolvedores** e **artigos técnicos**.
+
+O sistema permite criar, organizar e relacionar conteúdos técnicos com múltiplos autores, incluindo filtros dinâmicos e interface responsiva.
+
+---
+
+## 🧠 Sobre o projeto
+
+Este projeto foi desenvolvido com foco em:
+
+* Arquitetura limpa e organizada
+* Componentização com Livewire
+* Experiência de usuário fluida (sem SPA)
+* Código escalável e de fácil manutenção
+
+---
 
 ## 🚀 Tecnologias
 
-- Laravel
-- Livewire
-- Tailwind CSS
-- Pest (testes)
+* Laravel
+* Livewire
+* Tailwind CSS
+* Alpine.js
+* Pest (testes)
+
+---
+
 ## 🏗 Arquitetura
 
-A aplicação foi construída utilizando **Laravel + Livewire**, seguindo uma abordagem baseada em componentes.
+A aplicação segue uma abordagem baseada em **componentes e responsabilidade única**:
 
-Principais conceitos utilizados:
-
-- **Livewire Components** para interação dinâmica sem necessidade de SPA.
-- **Form Objects** para centralizar validações e manipulação de dados.
-- **Soft Deletes** para gerenciamento seguro de exclusão de registros.
-- **Eloquent Relationships** para associação entre Desenvolvedores e Artigos.
-- **Factories e Seeders** para geração de dados de teste.
-
-A interface foi construída com **Tailwind CSS**, garantindo responsividade e consistência visual.
+* 🔹 **Livewire Components** → UI dinâmica sem SPA
+* 🔹 **Form Objects** → validação centralizada
+* 🔹 **Soft Deletes** → exclusão segura
+* 🔹 **Eloquent Relationships** → relacionamento entre entidades
+* 🔹 **Factories & Seeders** → dados simulados para testes
 
 ---
 
-# 📦 Funcionalidades
+## 📦 Funcionalidades
 
-## Autenticação
-- Login
-- Registro
-- Reset de senha
-- Proteção de rotas autenticadas
+### 🔐 Autenticação
 
-## Desenvolvedores
-CRUD completo com:
-
-- Nome
-- Email único
-- Senioridade (Jr, Pl, Sr)
-- Skills (tags)
-
-Funcionalidades adicionais:
-
-- Filtros em tempo real por nome, senioridade e skills
-- Ordenação por nome, email e senioridade
-- Paginação
-- Arquivamento de desenvolvedores (Soft Delete)
-- Restauração de desenvolvedores arquivados
-- Exclusão permanente (Force Delete)
-
-## Artigos
-CRUD completo com:
-
-- Título
-- Slug automático
-- Conteúdo (HTML)
-- Data de publicação
-- Upload opcional de imagem de capa
-- Associação com múltiplos desenvolvedores
-
-## Interface
-
-Interface totalmente responsiva:
-
-- **Desktop:** visualização em grid com cards
-- **Mobile:** visualização em lista
-
-Badges exibem:
-
-- Quantidade de artigos por desenvolvedor
-- Quantidade de desenvolvedores por artigo
+* Login
+* Registro
+* Reset de senha
+* Proteção de rotas
 
 ---
 
-# 🛠 Instalação
+### 👩‍💻 Desenvolvedores
 
-1. Clone o repositório:
+* CRUD completo
+* Senioridade (Jr, Pl, Sr)
+* Skills (tags)
+
+**Extras:**
+
+* Filtros em tempo real
+* Ordenação dinâmica
+* Paginação
+* Soft Delete (arquivar)
+* Restore
+* Force Delete
+
+---
+
+### 📝 Artigos
+
+* CRUD completo
+* Slug automático
+* Conteúdo HTML
+* Upload de imagem de capa
+* Associação com múltiplos desenvolvedores
+
+**Extras:**
+* Filtros em tempo real
+* Paginação
+* Soft Delete (arquivar)
+* Restore
+* Force Delete
+
+---
+
+### 📱 Interface
+
+* Totalmente responsiva
+* Dark mode + Light mode 🌗
+
+**Desktop:** Grid com cards
+**Mobile:** Lista otimizada
+
+---
+
+## 🛠 Instalação
+
+### Requisitos
+
+* PHP >= 8.5
+* Composer
+* Node.js >= 18
+
+---
+
 ```bash
 git clone https://github.com/seu-usuario/itcloud-dev-articles.git
-```
-
-2. Entrar no projeto:
-```bash
 cd itcloud-dev-articles
-```
-
-3. Instalar dependências:
-```bash
 composer install
 npm install
-```
-
-4. Criar arquivo .env:
-```bash
 cp .env.example .env
-```
-
-5. Gerar chave de aplicação:
-```bash
 php artisan key:generate
 ```
 
-6. Banco de dados: 
+---
 
-O projeto utiliza **SQLite** para facilitar a execução. 
+### 🗄 Banco (SQLite)
 
-O arquivo do banco já está incluído no projeto: 
+```bash
+touch database/database.sqlite
+```
 
-database/database.sqlite 
+No `.env`:
 
-Execute as migrations e seeders:
+```env
+DB_CONNECTION=sqlite
+```
+
 ```bash
 php artisan migrate --seed
 ```
 
-7. Rodar aplicação:
+---
+
+### 📁 Storage
+
 ```bash
-php artisan serve
+php artisan storage:link
 ```
 
-8. Compilar assets:
+---
+
+### ▶️ Rodando
+
 ```bash
+php artisan serve
 npm run dev
 ```
 
 ---
 
-# 🔐 Usuário de demonstração
+### 🚀 Produção
 
-Email: demo@itcloud.com
+```bash
+npm run build
+```
+
+---
+
+## 🔐 Usuário de teste
+
+Email: [demo@itcloud.com](mailto:demo@itcloud.com)
 
 Senha: password
 
 ---
 
-# 🧪 Testes
-
-O projeto possui testes automatizados utilizando **Pest**.
-
-Cobertura inclui:
-
-- Autenticação
-- Proteção de rotas
-- CRUD de desenvolvedores
-- Arquivamento e restauração (Soft Delete)
-- Exclusão permanente (Force Delete)
-- Filtros e listagem de desenvolvedores
-
-Para rodar os testes:
+## 🧪 Testes
 
 ```bash
 php artisan test
 ```
 
+ou
+
+```bash
+php artisan test --parallel
+```
+
+Cobertura:
+
+* Autenticação
+* CRUD completo
+* Soft Delete / Restore / Force Delete
+* Filtros e listagens
+
 ---
 
-# 📁 Estrutura do Projeto
+## 📁 Estrutura
 
-Principais diretórios:
-- app/Models
-- app/Livewire
-- database/migrations
-- database/seeders
-- database/factories
-- tests
+```
+app/
+ ├── Models
+ ├── Livewire
+database/
+ ├── migrations
+ ├── seeders
+ ├── factories
+tests/
+```
+
+---
+
+## 🌐 Deploy
+
+Projeto disponível em produção:
+
+🔗 [Acessar aplicação](https://seu-link-aqui.onrender.com)
+
+---
+
+## ⚡ Observações
+
+* Projeto pronto para rodar localmente
+* Banco SQLite incluso
+* Dados populados automaticamente
+* Foco em avaliação técnica e boas práticas
+
+---
+
+## 💡 Autor
+
+Desenvolvido por Lara Scaranello
