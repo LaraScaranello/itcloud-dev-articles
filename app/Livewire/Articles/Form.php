@@ -76,7 +76,9 @@ class Form extends BaseForm
     {
         $this->validate();
 
-        $coverPath = $this->cover_image?->store('articles', 'public');
+        $coverPath = $this->cover_image
+            ? $this->cover_image->store('articles', 'public')
+            : $this->article->cover_image;
 
         $this->article->title = $this->title;
         $this->article->content = $this->content;
@@ -86,5 +88,7 @@ class Form extends BaseForm
         $this->article->save();
 
         $this->article->developers()->sync($this->developers);
+
+        
     }
 }
