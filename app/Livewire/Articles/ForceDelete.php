@@ -27,6 +27,8 @@ class ForceDelete extends Component
 
     public function delete(): void
     {
+        $this->authorize('forceDelete', $this->developer);
+
         $this->article->forceDelete();
         $this->modal = false;
 
