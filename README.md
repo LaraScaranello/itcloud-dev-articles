@@ -208,14 +208,6 @@ tests/
 
 ---
 
-## 🌐 Deploy
-
-Projeto disponível em produção:
-
-🔗 [Acessar aplicação](https://seu-link-aqui.onrender.com)
-
----
-
 ## ⚡ Observações
 
 * Projeto pronto para rodar localmente

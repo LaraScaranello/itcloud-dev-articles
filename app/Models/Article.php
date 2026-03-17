@@ -19,7 +19,7 @@ class Article extends Model
         'content',
         'cover_image',
         'published_at',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [
