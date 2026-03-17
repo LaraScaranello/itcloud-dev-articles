@@ -21,7 +21,7 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article): bool
     {
-        return false;
+        return true;
     }
 
     /**
