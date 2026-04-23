@@ -6,8 +6,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql mbstring zip
 
 # Node (Vite)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+RUN apt-get update && apt-get install -y nodejs npm
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -32,9 +31,6 @@ RUN php artisan key:generate --force || true
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
-
-# 🔥 Migrations (importante)
-RUN php artisan migrate --force || true
 
 # Permissões (menos agressivo que 777)
 RUN chmod -R 775 storage bootstrap/cache
