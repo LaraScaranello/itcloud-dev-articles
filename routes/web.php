@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'livewire.auth.login')->name('home');
 
+Route::get('/teste', fn () => 'ok');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
