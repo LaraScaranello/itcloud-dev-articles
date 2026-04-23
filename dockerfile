@@ -33,10 +33,6 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
 
-RUN php artisan cache:table
-RUN php artisan session:table
-RUN php artisan queue:table
-
 # 🔥 Migrations (importante)
 RUN php artisan migrate --force || true
 
