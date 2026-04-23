@@ -33,6 +33,10 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
 
+RUN php artisan cache:table
+RUN php artisan session:table
+RUN php artisan queue:table
+
 # 🔥 Migrations (importante)
 RUN php artisan migrate --force || true
 
@@ -41,4 +45,4 @@ RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 10000
 
-CMD php -S 0.0.0.0:10000 -t public
+CMD sh -c "mkdir -p database && touch database/database.sqlite && php artisan migrate --force && php -S 0.0.0.0:10000 -t public"
